@@ -1,0 +1,41 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  plugins: ["react", "@typescript-eslint"],
+  rules: {
+    "prefer-destructuring": ["error", { array: false }],
+    "no-param-reassign": ["error", { props: false }],
+    curly: ["error", "all"],
+    "class-methods-use-this": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": [1, { ignoreFunctionalComponents: true }],
+    "react/jsx-no-duplicate-props": [1, { ignoreCase: false }],
+    "react/static-property-placement": ["error", "static public field"],
+    "react/default-props-match-prop-types": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "react/no-danger": 0,
+    "react/button-has-type": 0,
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+  },
+};

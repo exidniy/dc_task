@@ -1,0 +1,21 @@
+.root {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 16px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.control {
+  grid-column-start: 1;
+}
+
+.sendButton {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  justify-self: start;
+}
