@@ -29,7 +29,7 @@ export const EventManager = () => {
 
   const handleAddEvent = useCallback(
     (title: string) => {
-      addEvent(getNewEvent(title, events.length));
+      addEvent(getNewEvent(title));
     },
     [events.length]
   );

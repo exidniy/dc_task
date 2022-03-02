@@ -1,1 +1,1 @@
-export const TIMER_INTERVAL = 5000;
+export const TIMER_INTERVAL = 20000;

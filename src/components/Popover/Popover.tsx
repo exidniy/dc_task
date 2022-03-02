@@ -9,14 +9,15 @@ export const Popover: FC<IPopoverProps> = ({
   anchorEl,
   children,
   handleClose,
-  id,
   open,
   ...rest
 }) => {
   return (
     <PopoverMUI
+      disableAutoFocus
       hideBackdrop
-      id={id}
+      disableScrollLock
+      closeAfterTransition
       open={open}
       anchorEl={anchorEl}
       onClose={handleClose}
@@ -27,6 +28,9 @@ export const Popover: FC<IPopoverProps> = ({
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
+      }}
+      sx={{
+        "&.MuiPopover-root": { position: "initial" },
       }}
       {...rest}
     >

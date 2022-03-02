@@ -21,7 +21,6 @@ export const Controls: FC<IControlsProps> = ({
   return (
     <div className={styles.root}>
       <TextField
-        autoFocus
         placeholder="Введите название события..."
         className={styles.control}
         size="small"

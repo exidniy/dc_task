@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Typography } from "@mui/material";
 import { getTimeFrom } from "../../../../utils/date";
 import { IMessageProps } from "./types";
 
-export const Event: FC<IMessageProps> = ({ title, time, isRead }) => {
+export const Event: FC<IMessageProps> = memo(({ title, time, isRead }) => {
   return (
     <div>
       <Typography
@@ -18,4 +18,6 @@ export const Event: FC<IMessageProps> = ({ title, time, isRead }) => {
       </Typography>
     </div>
   );
-};
+});
+
+Event.displayName = "EventComponent";

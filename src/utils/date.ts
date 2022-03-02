@@ -6,5 +6,5 @@ dayjs.extend(relativeTime);
 dayjs.locale("ru");
 
 export const getTimeFrom = (time: string) => {
-  return dayjs(time).from(new Date());
+  return dayjs(time).from(dayjs());
 };

@@ -21,8 +21,11 @@ export const eventsSlice = createSlice({
         isRead: true,
       }));
     },
-    clearEvents: (state) => {
-      state.events = [];
+    clearEvents: () => {
+      return {
+        events: [],
+        showEvents: false,
+      };
     },
     showEvents: (state, action: PayloadAction<boolean>) => {
       state.showEvents = action.payload;
