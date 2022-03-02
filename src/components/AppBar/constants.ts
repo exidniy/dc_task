@@ -1,0 +1,1 @@
+export const  SHOWN_EVENTS_QUANITTY = 5;

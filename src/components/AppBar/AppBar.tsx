@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { AppBar as AppBarMUI } from "@mui/material";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,26 +6,29 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Popover } from "../Popover/Popover";
-import { Message } from "../Message/Message";
-
-const msgs = [
-  { title: "Новый заголовок 1", time: new Date() },
-  { title: "Новый заголовок 2", time: new Date() },
-];
+import { Event } from "../EventManager/components/Event/Event";
+import { useEvents } from "../EventManager/useEvents";
+import { SHOWN_EVENTS_QUANITTY } from "./constants";
 
 export const AppBar = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [messages, setMessages] = useState(msgs);
-
-  const toggle = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorEl(anchorEl ? null : event.currentTarget);
-    },
-    [anchorEl]
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
   );
+  const {
+    events,
+    unreadEvents,
+    isEventsShown,
+    handlers: { showEvents },
+  } = useEvents();
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const open = Boolean(anchorEl);
-  const id = open ? "transitions-popper" : undefined;
+  const hasEvents = events.length > 0;
+
+  useEffect(() => {
+    setAnchorEl(isEventsShown ? buttonRef?.current : null);
+  }, [isEventsShown]);
+
+  const id = isEventsShown ? "transitions-popper" : undefined;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -33,24 +36,34 @@ export const AppBar = () => {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton size="large" color="inherit" onClick={toggle}>
-              <Badge badgeContent={NaN} color="error">
+            <IconButton
+              disabled={!hasEvents}
+              size="large"
+              color="inherit"
+              ref={buttonRef}
+              onClick={showEvents}
+            >
+              <Badge badgeContent={unreadEvents.length} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
             <Popover
-              handleClose={toggle}
+              handleClose={showEvents}
               id={id}
-              open={open}
+              open={isEventsShown}
               anchorEl={anchorEl}
             >
-              {messages.map((message) => (
-                <Message
-                  key={message.time.toUTCString()}
-                  title={message.title}
-                  time={message.time}
-                />
-              ))}
+              {events
+                .slice(-1 * SHOWN_EVENTS_QUANITTY)
+                .reverse()
+                .map((event) => (
+                  <Event
+                    key={event.time}
+                    title={event.title}
+                    time={event.time}
+                    isRead={event.isRead}
+                  />
+                ))}
             </Popover>
           </Box>
         </Toolbar>

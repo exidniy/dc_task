@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Typography } from "@mui/material";
-import { getTimeFrom } from "../../utils/date";
+import { getTimeFrom } from "../../../../utils/date";
 import { IMessageProps } from "./types";
 
-export const Message: FC<IMessageProps> = ({ title, time }) => {
+export const Event: FC<IMessageProps> = ({ title, time, isRead }) => {
   return (
     <div>
       <Typography
         variant="subtitle2"
         component="div"
-        sx={{ fontWeight: "bold" }}
+        sx={{ ...(!isRead && { fontWeight: "bold" }) }}
       >
         {title}
       </Typography>

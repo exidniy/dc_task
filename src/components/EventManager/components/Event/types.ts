@@ -1,4 +1,5 @@
 export interface IMessageProps {
     title: string;
-    time: Date;
+    time: string;
+    isRead: boolean;
 }
